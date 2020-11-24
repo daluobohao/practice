@@ -5,7 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script>
+    const counterNode = document.getElementById('count');
+
+    const createStore = (reducer, initialState) => {
+        const store = {}
+        store.state = initialState
+        store.listeners = []
+        
+        store.getState = () => store.state
+
+        store.subscribe = listener => {
+            store.listeners.push(listener)
+        }
+
+        store.dispatch = action => {
+            console.log('>Action', action)
+            store.state = reducer(store.state, action)
+            store.listeners.forEach(listener => listener())
+        }
+        return store
+    }
+    const getInitialState = () => {
+        return {
+            count: 0,
+        }
+    }
+    const reducer = (state = getInitialState(), action) => {
+        switch(action.type) {
+            case 'COUNT':
+                const nextState = {
+                    count: state.count + action.payload.count,
+                }
+                return nextState
+            default:
+                return state
+        }
+    }
+    const store = createStore(reducer)
+    store.subscribe(() => {
+        const state = store.getState()
+        const count = state.count
+        counterNode.innerHTML = count
+    })
+
+    // 点击事件
+    document.addEventListener('click', () => {
+        console.log('---previous state', store.getState())
+        store.dispatch({
+            type: 'COUNT',
+            payload: {
+                count: Math.ceil(Math.random() * 10)
+            }
+        })
+        console.log('++++new state', store.getState())
+    })
+    store.dispatch({})
+</script>
 <body>
-    
+    <div>Random count: <span id="count"></span></div>
 </body>
 </html>
