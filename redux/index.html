@@ -35,6 +35,9 @@
             count: 0,
         }
     }
+    const getInitialState = () => {
+        
+    }
     const reducer = (state = getInitialState(), action) => {
         switch(action.type) {
             case 'COUNT':
@@ -46,6 +49,7 @@
                 return state
         }
     }
+    
     const store = createStore(reducer)
     store.subscribe(() => {
         const state = store.getState()
