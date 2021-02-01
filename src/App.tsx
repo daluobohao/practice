@@ -1,57 +1,56 @@
 import React from 'react'
-import JS from './Componets/JS'
-import ReactComponents from './Componets/ReactComponents'
+import JS from './Components/JS'
+import ReactComponents from './Components/ReactComponents'
+import Test from './Test'
+import Home from './Home'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from 'react-router-dom';
-
+import { Layout, Menu } from 'antd';
+import 'antd/dist/antd.css';
+const { Header } = Layout;
 class App extends React.Component<any, any> {
-  constructor (props: any) {
-    super(props);
-    this.state = {
-      counter: 0
-    };
-  }
 
-  render () {
-    return (
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/react'>react</Link>
-              </li>
-              <li>
-                <Link to='/javascript'>javascript</Link>
-              </li>
-              <li>
-                <Link to='/test'>test</Link>
-              </li>
-            </ul>
-          </nav>
-          <Switch>
-            <Route path='/react'>
-              <ReactComponents />
-            </Route>
-            <Route path='/javascript'>
-              <JS />
-            </Route>
-            <Route path='/test'>
-              test
-            </Route>
-            <Route path='/'>
-              home
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    )};
-}
+render() {
+  return(
+  <Layout>
+    <Router>
+    <Header className="header">
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={['1']}
+        style={{ lineHeight: '64px' }}
+      >
+        
+          <Menu.Item key="1"><Link to='/'>Home</Link></Menu.Item>
+          <Menu.Item key="2"> <Link to='/react'>react</Link></Menu.Item>
+          <Menu.Item key="3"><Link to='/javascript'>javascript</Link></Menu.Item>
+          <Menu.Item key="4"><Link to='/test'>test</Link></Menu.Item>
+       
+      </Menu>
+
+    </Header>
+    <Switch>
+      <Route path='/react'>
+        <ReactComponents />
+      </Route>
+      <Route path='/javascript'>
+        <JS />
+      </Route>
+      <Route path='/test'>
+        <Test />
+      </Route>
+      <Route path='/'>
+        <Home />
+      </Route>
+    </Switch>
+    </Router>
+  </Layout>)}
+};
+
 export default App
