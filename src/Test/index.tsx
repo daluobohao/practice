@@ -8,6 +8,7 @@ import {
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import 'antd/dist/antd.css';
+import TypeTest from './TypeTest'
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 export default class JS extends React.Component<any, any>{
@@ -31,8 +32,8 @@ export default class JS extends React.Component<any, any>{
                     </span>
                   }
                 >
-                  <Menu.Item key="1"><Link to='/'>test</Link></Menu.Item>
-
+                  <Menu.Item key="1"><Link to='/test'>test</Link></Menu.Item>
+                  <Menu.Item key="2"><Link to='/type'>type</Link></Menu.Item>
                 </SubMenu>
               </Menu>
             </Sider>
@@ -49,8 +50,11 @@ export default class JS extends React.Component<any, any>{
                 }}
               >
                     <Switch>
-                    <Route path='/'>
+                    <Route path='/test'>
                         test
+                    </Route>
+                    <Route path='/type'>
+                        <TypeTest />
                     </Route>
                     </Switch>
               </Content>
